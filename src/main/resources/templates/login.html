@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div th:if= "${Successmsg}">
+        <h3 style="color: aqua;" th:text="${Successmsg}"></h3>
+    </div>
+    <div th:if= "${errormsg}">
+        <h3 style="color:red;" th:text="${errormsg}"></h3>
+    </div>
+        <form th:action="@{loginform}" th:object="${user}" method="post">
+            <table border="2" align="center">
+           <tr><caption><h3>Login Here...</h3></caption></tr>
+            <tr><td>Enter Email-ID :</td><td><input type="email" th:field="*{email}"/></td></tr>
+            <tr><td>Enter Password :</td><td>
+            <input type="password" th:field="*{U_pass}"/></td></tr>
+            <tr><td><input type="submit" name="Login"/></td></tr>
+        </table>
+    <br>
+    <br>
+    <p align="center">If Your Not <a href="regpage"><b>Register</b></a></p><br>
+    <p align="center">Home Page...<a href="index.html"><b>Home</b></a></p>
+        </form>
+</body>
+</html>
