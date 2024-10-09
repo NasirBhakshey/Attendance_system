@@ -74,4 +74,14 @@ public class UserImplementation implements UserInterfaces{
         }
     }
 
+    @Override
+    public List<User> getuserbyattendID(Integer id) {
+        return userRepository.findUserByAttendID(id);
+    }
+
+    @Override
+    public User getuserwithattend(Integer id) {
+       return userRepository.findUserWithAttend(id);
+    }
+
 }

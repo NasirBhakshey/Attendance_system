@@ -8,10 +8,13 @@ public interface UserInterfaces {
 
     public boolean InsertUser(User user);
     public boolean updateUser(User user, int id);
-     public User Loginuser(String email,String pass);
+    public User Loginuser(String email,String pass);
     public List<User> getlldetails();
     public boolean deleteUser(int id);
     public User searchbyID(int id);
+
+    public List<User> getuserbyattendID(Integer id);
+    public User getuserwithattend(Integer id);
 
 
     

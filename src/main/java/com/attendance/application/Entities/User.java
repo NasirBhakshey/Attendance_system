@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,6 +21,10 @@ public class User {
     private String U_pass;
     private String email;
     private String U_phoneNo;
+
+    @ManyToOne
+    @JoinColumn(name = "a_id")
+    private Attend attend;
 
 
     public Integer getU_id() {
@@ -50,6 +56,12 @@ public class User {
     }
     public void setEmail(String email) {
         this.email = email;
+    }
+    public Attend getAttend() {
+        return attend;
+    }
+    public void setAttend(Attend attend) {
+        this.attend = attend;
     }
 
 }
