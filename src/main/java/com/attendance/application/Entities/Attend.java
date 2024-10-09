@@ -28,7 +28,7 @@ public class Attend {
 
     @PrePersist
     public void prePersist() {
-        this.date = LocalDate.now(); 
+        this.date = LocalDate.now();
         this.time=LocalTime.now();
     }
 
@@ -58,6 +58,7 @@ public class Attend {
 
     public void setTime(LocalTime time) {
         this.time = time;
-    }  
+    }
 
 }
+//This is attendance class
