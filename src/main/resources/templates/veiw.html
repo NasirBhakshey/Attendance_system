@@ -8,22 +8,19 @@
 <body>
     <table border="2" align="center">
         <tr>
-            <th>User-ID</th>
-            <th>User-EmailID</th>
+            <th>Attend-ID</th>
+            <th>Attend-Name</th>
+            <th>Attend-Date</th>
+            <th>Attend-Time</th>
             <th>User-Name</th>
-            <th>User-Password</th>
-            <th>User-PhoneNo</th>
-            <th>User-Date</th>
-            <th>Emp_ID</th>
-            <th>Delete/Edit</th>
         </tr>
         <tr th:each= "view:${Viewlist}">
-            <td><span th:text="${view.U_id}"></span></td>
-            <td><span th:text="${view.U_name}"></span></td>
-            <td><span th:text="${view.U_pass}"></span></td>
-            <td><span th:text="${view.email}"></span></td>
-            <td><span th:text="${view.U_phoneNo}"></span></td>
-            <td><a th:href= "@{/Viewlist/{ID}(ID=${view.ID})}">Delete</a><a th:href= "@{/Viewlist/edit/{ID}(ID=${view.ID})}">Edit</a></td>
+            <td><span th:text="${view.a_id}"></span></td>
+            <td><span th:text="${view.a_name}"></span></td>
+            <td><span th:text="${view.date}"></span></td>
+            <td><span th:text="${view.time}"></span></td>
+            <td><span th:text="${view.user.U_name}"></span></td>
+            <td><a th:href= "@{/Viewlist/{a_id}(a_id=${view.a_id})}">Delete</a><a th:href= "@{/Viewlist/edit/{a_id}(id=${view.a_id})}">Edit</a></td>
         </tr>
 
     </table>

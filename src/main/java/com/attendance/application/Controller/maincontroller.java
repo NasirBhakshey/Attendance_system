@@ -1,13 +1,17 @@
 package com.attendance.application.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.attendance.application.Entities.Attend;
 import com.attendance.application.Entities.User;
 import com.attendance.application.Services.UserImplementation;
 
@@ -55,6 +59,20 @@ public class maincontroller {
             return"login";
         }
     }
+
+    @PostMapping("serachpage")
+    public String insertAttend(@RequestParam("a_name") String a_name,@RequestParam("user_id") int user_id ){
+        userImplementation.savAttend(a_name, user_id);
+        return"signout";
+    }
+
+    @GetMapping("Viewattend")
+    public String listAttendent(Model model){
+        List<Attend> attends=userImplementation.getallAttend();
+        model.addAttribute("Viewlist", attends);
+        return "veiw";
+    }
+
 
 }
 

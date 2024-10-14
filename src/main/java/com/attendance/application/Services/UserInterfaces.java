@@ -1,5 +1,7 @@
 package com.attendance.application.Services;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import com.attendance.application.Entities.Attend;
@@ -14,13 +16,9 @@ public interface UserInterfaces {
     public boolean deleteUser(int id);
     public User searchbyID(int id);
 
-    public List<User> getuserbyattendID(Integer id);
 
-    public boolean insertAttdent(Attend attend);
-   // public User getuserwithattend(Integer id);
+    public Attend savAttend(String name,int user_id);
 
-
-    
-
+    public List<Attend> getallAttend();
 
 }

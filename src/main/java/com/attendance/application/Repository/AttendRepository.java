@@ -6,4 +6,6 @@ import com.attendance.application.Entities.Attend;
 
 public interface AttendRepository extends JpaRepository<Attend,Integer>{
 
+    
+
 }
