@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border="2" align="center">
+        <tr>
+            <th>User-ID</th>
+            <th>User-EmailID</th>
+            <th>User-Name</th>
+            <th>User-Password</th>
+            <th>User-PhoneNo</th>
+            <th>User-Date</th>
+            <th>Emp_ID</th>
+            <th>Delete/Edit</th>
+        </tr>
+        <tr th:each= "view:${Viewlist}">
+            <td><span th:text="${view.U_id}"></span></td>
+            <td><span th:text="${view.U_name}"></span></td>
+            <td><span th:text="${view.U_pass}"></span></td>
+            <td><span th:text="${view.email}"></span></td>
+            <td><span th:text="${view.U_phoneNo}"></span></td>
+            <td><a th:href= "@{/Viewlist/{ID}(ID=${view.ID})}">Delete</a><a th:href= "@{/Viewlist/edit/{ID}(ID=${view.ID})}">Edit</a></td>
+        </tr>
+
+    </table>
+</body>
+</html>

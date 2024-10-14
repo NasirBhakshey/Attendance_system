@@ -6,6 +6,9 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <div th:if= "${errormsg}">
+        <h3 style="color:red;" th:text="${errormsg}"></h3>
+    </div>
+    <h2>Signout</h2>
 </body>
 </html>

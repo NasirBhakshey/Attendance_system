@@ -7,5 +7,10 @@
 </head>
 <body>
     <h1>Welcome To <span th:text="${Username}"></span> Profile...</h1>
+    <h2><a th:href= "@{viewpage}">View-page</a></h2>
+    <form th:action= "${serachpage}" th:object="${attend}" method="post">
+        <h1>Enter ID: <input type="text" th-field="*{a_name}"/></h1>
+        <input type="submit" name="submit"/>
+    </form>
 </body>
 </html>

@@ -6,7 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.attendance.application.Entities.Attend;
 import com.attendance.application.Entities.User;
+import com.attendance.application.Repository.AttendRepository;
 import com.attendance.application.Repository.UserRepository;
 
 @Service
@@ -14,6 +16,9 @@ public class UserImplementation implements UserInterfaces{
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private AttendRepository attendRepository;
 
     @Override
     public boolean InsertUser(User user) {
@@ -80,8 +85,20 @@ public class UserImplementation implements UserInterfaces{
     }
 
     @Override
-    public User getuserwithattend(Integer id) {
-       return userRepository.findUserWithAttend(id);
+    public boolean insertAttdent(Attend attend) {
+        try {
+            attendRepository.save(attend);
+            return true;
+        } catch (Exception e) {
+           e.printStackTrace();
+           return false;
+        }
+
     }
+
+    // @Override
+    // public User getuserwithattend(Integer id) {
+    //    return userRepository.findUserWithAttend(id);
+    // }
 
 }

@@ -2,6 +2,7 @@ package com.attendance.application.Services;
 
 import java.util.List;
 
+import com.attendance.application.Entities.Attend;
 import com.attendance.application.Entities.User;
 
 public interface UserInterfaces {
@@ -14,7 +15,9 @@ public interface UserInterfaces {
     public User searchbyID(int id);
 
     public List<User> getuserbyattendID(Integer id);
-    public User getuserwithattend(Integer id);
+
+    public boolean insertAttdent(Attend attend);
+   // public User getuserwithattend(Integer id);
 
 
     
