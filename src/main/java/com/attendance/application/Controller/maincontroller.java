@@ -1,5 +1,7 @@
 package com.attendance.application.Controller;
 
+import java.sql.ResultSet;
+import java.time.LocalTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,11 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.attendance.application.Entities.Attend;
+import com.attendance.application.Entities.SignUp;
 import com.attendance.application.Entities.User;
 import com.attendance.application.Services.UserImplementation;
 
@@ -36,7 +39,7 @@ public class maincontroller {
             return"login";
         }else{
             model.addAttribute("errormsg", "User Register Failed Due To Some Error");
-            return"redirect:/regage";
+            return"redirect:/regpage";
         }
     }
 
@@ -47,28 +50,31 @@ public class maincontroller {
     }
 
     @PostMapping("loginform")
-    public String loginform(@ModelAttribute("user") User user, Model model)
+    public String loginform(@ModelAttribute("user") User user, Model model,@ModelAttribute SignUp signUp)
     {
         User user2=userImplementation.Loginuser(user.getEmail(), user.getU_pass());
-        if(user2 != null)
+        SignUp signUp2=userImplementation.savAttend(user2.getU_id());
+        LocalTime time2=signUp2.getTime();
+        int hour1=time2.getHour();
+        LocalTime time=LocalTime.now();
+        int hour=time.getHour();
+
+        if(user2 != null && hour1==hour && signUp2!=null)
         {
             model.addAttribute("Username", user2.getU_name());
             return"signup";
+        }else if(user2 != null && hour1==hour && signUp2!=null){
+            model.addAttribute("Username", user2.getU_name());
+            return"signout";
         }else{
             model.addAttribute("errormsg", "Such User is not Found");
             return"login";
         }
     }
 
-    @PostMapping("serachpage")
-    public String insertAttend(@RequestParam("a_name") String a_name,@RequestParam("user_id") int user_id ){
-        userImplementation.savAttend(a_name, user_id);
-        return"signout";
-    }
-
     @GetMapping("Viewattend")
     public String listAttendent(Model model){
-        List<Attend> attends=userImplementation.getallAttend();
+        List<SignUp> attends=userImplementation.getallAttend();
         model.addAttribute("Viewlist", attends);
         return "veiw";
     }
