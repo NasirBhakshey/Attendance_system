@@ -2,9 +2,9 @@ package com.attendance.application.Repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.attendance.application.Entities.Attend;
+import com.attendance.application.Entities.SignUp;
 
-public interface AttendRepository extends JpaRepository<Attend,Integer>{
+public interface AttendRepository extends JpaRepository<SignUp,Integer>{
 
     
 

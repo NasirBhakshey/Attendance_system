@@ -1,8 +1,8 @@
 package com.attendance.application.Services;
 
 import java.util.List;
-
-import com.attendance.application.Entities.Attend;
+import java.util.Optional;
+import com.attendance.application.Entities.SignUp;
 import com.attendance.application.Entities.User;
 
 public interface UserInterfaces {
@@ -15,8 +15,11 @@ public interface UserInterfaces {
     public User searchbyID(int id);
 
 
-    public Attend savAttend(String name,int user_id);
+    public SignUp savAttend(int user_id);
+    public List<SignUp> getallAttend();
+    public boolean deleteattend(int id);
+    public Optional<SignUp> searchByattend(int id);
+    public SignUp updatAttend(SignUp attend,int id);
 
-    public List<Attend> getallAttend();
 
 }

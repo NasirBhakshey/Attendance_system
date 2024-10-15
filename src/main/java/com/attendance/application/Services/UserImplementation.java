@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.attendance.application.Entities.Attend;
+import com.attendance.application.Entities.SignUp;
 import com.attendance.application.Entities.User;
 import com.attendance.application.Repository.AttendRepository;
 import com.attendance.application.Repository.UserRepository;
@@ -79,21 +79,51 @@ public class UserImplementation implements UserInterfaces{
         }
     }
 
+    //Attendant Part.....
+
     @Override
-    public Attend savAttend(String a_name,int user_id) {
+    public SignUp savAttend(int user_id) {
         
         User user=userRepository.findById(user_id).orElseThrow(() -> new RuntimeException("Such is not found::"));
 
-        Attend attend=new Attend();
-        attend.setA_name(a_name);
+        SignUp attend=new SignUp();
         attend.setUser(user);
         return attendRepository.save(attend);
 
     }
 
     @Override
-    public List<Attend> getallAttend() {
+    public List<SignUp> getallAttend() {
         return attendRepository.findAll();
     }
+
+    @Override
+    public boolean deleteattend(int id) {
+        Optional<SignUp> attend=attendRepository.findById(id);
+        if(attend.isPresent()){
+            userRepository.deleteById(id);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    @Override
+    public Optional<SignUp> searchByattend(int id) {
+       return attendRepository.findById(id);
+    }
+
+    @Override
+    public SignUp updatAttend(SignUp attend, int id) {
+        Optional<SignUp> attend2=searchByattend(id);
+        if(attend2.isPresent())
+        {
+            return attendRepository.save(attend);
+        }else{
+            return null;
+        }
+    }
+
+    
 
 }

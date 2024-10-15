@@ -9,14 +9,12 @@
     <table border="2" align="center">
         <tr>
             <th>Attend-ID</th>
-            <th>Attend-Name</th>
             <th>Attend-Date</th>
             <th>Attend-Time</th>
             <th>User-Name</th>
         </tr>
         <tr th:each= "view:${Viewlist}">
             <td><span th:text="${view.a_id}"></span></td>
-            <td><span th:text="${view.a_name}"></span></td>
             <td><span th:text="${view.date}"></span></td>
             <td><span th:text="${view.time}"></span></td>
             <td><span th:text="${view.user.U_name}"></span></td>
