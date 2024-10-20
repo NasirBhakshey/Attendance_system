@@ -13,7 +13,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
-
 @Entity
 @Table
 public class SignUp {
@@ -23,8 +22,9 @@ public class SignUp {
     @Column
     private Integer a_id;
     @Column
-    private LocalDate  date;
-    private LocalTime time;
+    private LocalDate date;
+    private LocalTime SignIn;
+    private LocalTime SignOut;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -40,10 +40,27 @@ public class SignUp {
 
     @PrePersist
     public void prePersist() {
-        this.date = LocalDate.now();       
-        this.time=LocalTime.now();    
-        }
-        
+        this.date = LocalDate.now();
+        this.SignIn = LocalTime.now();
+        this.SignOut = LocalTime.now();
+    }
+
+    public LocalTime getSignIn() {
+        return SignIn;
+    }
+
+    public void setSignIn(LocalTime signIn) {
+        SignIn = signIn;
+    }
+
+    public LocalTime getSignOut() {
+        return SignOut;
+    }
+
+    public void setSignOut(LocalTime signOut) {
+        SignOut = signOut;
+    }
+
     public Integer getA_id() {
         return a_id;
     }
@@ -60,13 +77,13 @@ public class SignUp {
         this.date = date;
     }
 
-    public LocalTime getTime() {
-        return time;
+    @Override
+    public String toString() {
+        return "SignUp [a_id=" + a_id + ", date=" + date + ", SignIn=" + SignIn + ", SignOut=" + SignOut + ", user="
+                + user + "]";
     }
 
-    public void setTime(LocalTime time) {
-        this.time = time;
-    }
+    
 
 }
-//This is attendance class
+// This is attendance class

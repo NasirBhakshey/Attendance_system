@@ -6,11 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    <div th:if= "${Username}">
-        <h3 style="color:red;" th:text="${Username}"></h3>
-    </div>
-    <h2>Signout</h2>
-
-    <h1><a th:href= "@{Viewattend}">View-attend</a></h1>
+    <h1>Sign-Up <span th:text="${Username}"></span> SuccessFully</h1>
 </body>
 </html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border="2" align="center">
+        <tr>
+            <th>Attend-ID</th>
+            <th>User-Name</th>
+            <th>Attend-Date</th>
+            <th>Attend-Time</th>
+        </tr>
+        <tr th:each= "view:${signview}">
+            <td><span th:text="${view.a_id}"></span></td>
+            <td><span th:text="${view.user.U_name}"></span></td>
+            <td><span th:text="${view.date}"></span></td>
+            <td><span th:text="${view.time}"></span></td>
+            <td><a th:href= "@{/signview/{a_id}(a_id=${view.a_id})}">Delete</a><a th:href= "@{/signview/edit/{a_id}(id=${view.a_id})}">Edit</a></td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -9,16 +9,19 @@
     <table border="2" align="center">
         <tr>
             <th>Attend-ID</th>
-            <th>Attend-Date</th>
-            <th>Attend-Time</th>
             <th>User-Name</th>
+            <th>Attend-Date</th>
+            <th>SignIn-Time</th>
+            <th>Signout-Time</th>
+            <th>Action</th>
         </tr>
         <tr th:each= "view:${Viewlist}">
             <td><span th:text="${view.a_id}"></span></td>
             <td><span th:text="${view.date}"></span></td>
-            <td><span th:text="${view.time}"></span></td>
-            <td><span th:text="${view.user.U_name}"></span></td>
-            <td><a th:href= "@{/Viewlist/{a_id}(a_id=${view.a_id})}">Delete</a><a th:href= "@{/Viewlist/edit/{a_id}(id=${view.a_id})}">Edit</a></td>
+            <td><span th:text="${#temporals.format(view.SignIn, 'hh:mm:ss a')}"></span></td>
+            <td><span th:text="${#temporals.format(view.SignOut, 'hh:mm:ss a')}"></span></td>
+            <td><span th:text="${view.user.U_id}"></span></td>
+            <td><a th:href= "@{/Viewlist/{id}(id=${view.user.U_id})}">Delete</a><a th:href= "@{/Viewlist/edit/{id}(id=${view.user.U_id})}">Edit</a></td>
         </tr>
     </table>
 </body>

@@ -48,8 +48,9 @@ public class UserImplementation implements UserInterfaces{
         if(user !=null && user.getU_pass().equals(pass))
         {
             return user;
+        }else{
+            return null;
         }
-        return null;
     }
 
     @Override
@@ -85,7 +86,6 @@ public class UserImplementation implements UserInterfaces{
     public SignUp savAttend(int user_id) {
         
         User user=userRepository.findById(user_id).orElseThrow(() -> new RuntimeException("Such is not found::"));
-
         SignUp attend=new SignUp();
         attend.setUser(user);
         return attendRepository.save(attend);
@@ -109,20 +109,40 @@ public class UserImplementation implements UserInterfaces{
     }
 
     @Override
-    public Optional<SignUp> searchByattend(int id) {
-       return attendRepository.findById(id);
+    public SignUp searchByattend(int id) {
+        Optional<SignUp> optional=attendRepository.findById(id);
+        if(optional.isPresent())
+        {
+           return optional.get();
+        }
+        return null;
     }
 
     @Override
     public SignUp updatAttend(SignUp attend, int id) {
-        Optional<SignUp> attend2=searchByattend(id);
-        if(attend2.isPresent())
+        SignUp signUp=searchByattend(id);
+        if(signUp!=null)
         {
             return attendRepository.save(attend);
         }else{
             return null;
         }
     }
+
+    @Override
+    public List<SignUp> getOrdersWithCustomerDetails() {
+       return attendRepository.findAttendsWithUserDetails();
+    }
+
+    @Override
+    public List<SignUp> getByUserId(Integer id) {
+         return attendRepository.findByUserId(id);
+    }
+
+    // @Override
+    // public List<SignUp> getByUserID(Integer ID) {
+    //     return attendRepository.findByUserID(ID);
+    // }
 
     
 

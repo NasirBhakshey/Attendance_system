@@ -1,7 +1,7 @@
 package com.attendance.application.Services;
 
 import java.util.List;
-import java.util.Optional;
+
 import com.attendance.application.Entities.SignUp;
 import com.attendance.application.Entities.User;
 
@@ -18,8 +18,13 @@ public interface UserInterfaces {
     public SignUp savAttend(int user_id);
     public List<SignUp> getallAttend();
     public boolean deleteattend(int id);
-    public Optional<SignUp> searchByattend(int id);
+    public SignUp searchByattend(int id);
     public SignUp updatAttend(SignUp attend,int id);
+    public List<SignUp> getOrdersWithCustomerDetails();
+
+    public List<SignUp> getByUserId(Integer id);
+
+    // public List<SignUp> getByUserID(Integer ID);
 
 
 }

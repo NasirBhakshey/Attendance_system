@@ -1,12 +1,14 @@
 package com.attendance.application.Entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-
+import java.util.*;
 @Entity
 @Table
 public class User {
@@ -19,6 +21,10 @@ public class User {
     private String U_pass;
     private String email;
     private String U_phoneNo;
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private List<SignUp> signUp;
+
 
     public Integer getU_id() {
         return U_id;
@@ -49,6 +55,12 @@ public class User {
     }
     public void setEmail(String email) {
         this.email = email;
+    }
+    public List<SignUp> getSignUp() {
+        return signUp;
+    }
+    public void setSignUp(List<SignUp> signUp) {
+        this.signUp = signUp;
     }
 
 }
