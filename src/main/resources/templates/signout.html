@@ -12,5 +12,10 @@
     <h2>Signout</h2>
 
     <h1><a th:href= "@{Viewattend}">View-attend</a></h1>
+
+    <form th:action= "${SerchbyID}" method="post">
+        <h1><input type="number" th-field="*{U_id}"></h1>
+        <input type="submit" name="Submit"/>
+    </form>
 </body>
 </html>

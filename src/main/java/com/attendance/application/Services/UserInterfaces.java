@@ -22,9 +22,9 @@ public interface UserInterfaces {
     public SignUp updatAttend(SignUp attend,int id);
     public List<SignUp> getOrdersWithCustomerDetails();
 
-    public List<SignUp> getByUserId(Integer id);
+    public SignUp getByUserId(Integer id);
 
-    // public List<SignUp> getByUserID(Integer ID);
+    public List<SignUp> getByUserID(Integer U_id);
 
 
 }

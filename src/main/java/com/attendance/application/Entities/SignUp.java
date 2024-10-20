@@ -2,6 +2,8 @@ package com.attendance.application.Entities;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Optional;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -81,6 +83,11 @@ public class SignUp {
     public String toString() {
         return "SignUp [a_id=" + a_id + ", date=" + date + ", SignIn=" + SignIn + ", SignOut=" + SignOut + ", user="
                 + user + "]";
+    }
+
+    public Optional<SignUp> orElseThrow(Object object) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'orElseThrow'");
     }
 
     

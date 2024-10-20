@@ -135,14 +135,20 @@ public class UserImplementation implements UserInterfaces{
     }
 
     @Override
-    public List<SignUp> getByUserId(Integer id) {
-         return attendRepository.findByUserId(id);
+    public SignUp getByUserId(Integer id) {
+        Optional<SignUp> optional=attendRepository.findByUserId(id);
+        if(optional.isPresent()){
+            return optional.get();
+        }
+        else{
+            return null;
+        }
     }
 
-    // @Override
-    // public List<SignUp> getByUserID(Integer ID) {
-    //     return attendRepository.findByUserID(ID);
-    // }
+    @Override
+    public List<SignUp> getByUserID(Integer U_id) {
+        return attendRepository.findByUserID(U_id);
+    }
 
     
 
