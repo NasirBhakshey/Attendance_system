@@ -22,8 +22,7 @@ public class User {
     private String email;
     private String U_phoneNo;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    private List<SignUp> signUp;
+    
 
 
     public Integer getU_id() {
@@ -55,12 +54,6 @@ public class User {
     }
     public void setEmail(String email) {
         this.email = email;
-    }
-    public List<SignUp> getSignUp() {
-        return signUp;
-    }
-    public void setSignUp(List<SignUp> signUp) {
-        this.signUp = signUp;
     }
 
 }

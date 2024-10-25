@@ -2,7 +2,6 @@ package com.attendance.application.Entities;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Optional;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,8 +25,8 @@ public class SignUp {
     @Column
     private LocalDate date;
     private LocalTime SignIn;
-    private LocalTime SignOut;
-
+    private LocalTime signOut;
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
@@ -35,7 +34,6 @@ public class SignUp {
     public User getUser() {
         return user;
     }
-
     public void setUser(User user) {
         this.user = user;
     }
@@ -44,7 +42,6 @@ public class SignUp {
     public void prePersist() {
         this.date = LocalDate.now();
         this.SignIn = LocalTime.now();
-        this.SignOut = LocalTime.now();
     }
 
     public LocalTime getSignIn() {
@@ -53,14 +50,6 @@ public class SignUp {
 
     public void setSignIn(LocalTime signIn) {
         SignIn = signIn;
-    }
-
-    public LocalTime getSignOut() {
-        return SignOut;
-    }
-
-    public void setSignOut(LocalTime signOut) {
-        SignOut = signOut;
     }
 
     public Integer getA_id() {
@@ -79,18 +68,13 @@ public class SignUp {
         this.date = date;
     }
 
-    @Override
-    public String toString() {
-        return "SignUp [a_id=" + a_id + ", date=" + date + ", SignIn=" + SignIn + ", SignOut=" + SignOut + ", user="
-                + user + "]";
+    public LocalTime getSignOut() {
+        return signOut;
     }
 
-    public Optional<SignUp> orElseThrow(Object object) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'orElseThrow'");
+    public void setSignOut(LocalTime signOut) {
+        this.signOut = signOut;
     }
-
-    
 
 }
 // This is attendance class

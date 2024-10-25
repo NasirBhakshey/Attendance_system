@@ -15,13 +15,13 @@
             <th>Signout-Time</th>
             <th>Action</th>
         </tr>
-        <tr th:each= "view:${Viewlist}">
-            <td><span th:text="${view.a_id}"></span></td>
-            <td><span th:text="${view.date}"></span></td>
-            <td><span th:text="${#temporals.format(view.SignIn, 'hh:mm:ss a')}"></span></td>
-            <td><span th:text="${#temporals.format(view.SignOut, 'hh:mm:ss a')}"></span></td>
-            <td><span th:text="${view.user.U_id}"></span></td>
-            <td><a th:href= "@{/Viewlist/{id}(id=${view.user.U_id})}">Delete</a><a th:href= "@{/Viewlist/edit/{id}(id=${view.user.U_id})}">Edit</a></td>
+        <tr th:each= "veiw:${Viewlist}">
+            <td><span th:text="${veiw.a_id}"></span></td>
+            <td><span th:text="${veiw.user.U_name}"></span></td>
+            <td><span th:text="${veiw.date}"></span></td>
+            <td><span th:text="${#temporals.format(veiw.SignIn, 'hh:mm:ss a')}"></span></td>
+            <td><span th:text="${#temporals.format(veiw.signOut, 'hh:mm:ss a')}"></span></td>
+            <td><a th:href= "@{/Viewlist/{id}(id=${veiw.user.U_id})}">Delete</a><a th:href= "@{/Viewlist/edit/{id}(id=${veiw.user.U_id})}">Edit</a></td>
         </tr>
     </table>
 </body>

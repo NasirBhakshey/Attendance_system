@@ -1,6 +1,6 @@
 package com.attendance.application.Controller;
 
-import java.time.LocalDate;
+import java.time.*;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.attendance.application.Entities.SignUp;
@@ -61,56 +62,34 @@ public class maincontroller {
             return "login";
         }
     }
-    // LocalTime time = signUp2.getSignIn();
-    // // Integer time2 = time.getHour() * 10000 + time.getMinute() * 100 +
-    // // time.getSecond();
-
-    // LocalTime time1 = LocalTime.now();
-    // // Integer time3 = time1.getHour() * 10000 + time1.getMinute() * 100 +
-    // // time1.getSecond();
-
-    // LocalDate date = signUp2.getDate();
-
-    // LocalDate date3 = LocalDate.now();
-
-    // if ((date.equals(date3)) && (!time.equals(time1))) {
-    // model.addAttribute("Username", user2.getU_name());
-    // return "signout";
-    // } else {
-    // model.addAttribute("errormsg", "Such User is not Found");
-    // return "redirect:/Sign_up";
-    // }
-    // } else if (user2 != null && signUp2 == null) {
-    // SignUp signUp3 = userImplementation.savAttend(user2.getU_id());
-    // if (signUp3 != null) {
-    // model.addAttribute("signUp3", user2.getU_name());
-    // return "redirect:/Sign_up";
-    // } else {
-    // model.addAttribute("signUp3", user2.getU_name());
-    // return "";
-    // }
-
-    // else if (user2!=null && (date2 == date4) && time2 != time3) {
-    // return"signout";
-    // }else
-
     @GetMapping("Sign_up")
     public String signup(HttpSession session, Model model) {
         User user = (User) session.getAttribute("UserID");
-        SignUp signUp2 = userImplementation.getByUserId(user.getU_id());
+        List<SignUp> signUp2 = userImplementation.getByUserID(user.getU_id());
+     
         if (signUp2 != null) {
-            LocalDate localDate=signUp2.getDate();
-            LocalDate localDate2=LocalDate.now();
-            if(localDate.equals(localDate2)){
-            System.out.println(localDate+" "+localDate2);
-            System.out.println(signUp2.getUser().getU_id());
-            System.out.println(user.getU_id());
-            model.addAttribute("user_ID", signUp2.getUser().getU_name());
-            return "Success";
-            }else{
-            session.setAttribute("User_ID", user);
-            model.addAttribute("Username", signUp2.getUser().getU_name());
-            return "signup";
+            int i = 0;
+
+            for (SignUp signUp : signUp2) {
+                LocalDate localDate = signUp.getDate();
+                LocalDate localDate2 = LocalDate.now();
+                if (localDate.equals(localDate2)) {
+
+                    i++;
+                }
+            }
+            LocalDate localDate2 = LocalDate.now();
+
+
+            if (i > 0) {
+                session.setAttribute("User_ID", user);
+                model.addAttribute("user_ID", user.getU_name());
+                model.addAttribute("date", localDate2);
+                return "signout";
+            } else {
+                session.setAttribute("User_ID", user);
+                model.addAttribute("Username", user.getU_name());
+                return "signup";
             }
         } else {
             session.setAttribute("User_ID", user);
@@ -129,7 +108,6 @@ public class maincontroller {
         } else {
             return "signup";
         }
-
     }
 
     @GetMapping("Viewattend")
@@ -139,12 +117,12 @@ public class maincontroller {
         return "veiw";
     }
 
-    // @GetMapping("joinattend")
-    // public String joinattend(@PathVariable("id") int id, Model model) {
-    // List<SignUp> signUps = userImplementation.getByUserId(null);
-    // model.addAttribute("signview", signUps);
-    // return "joinview";
-    // }
+    @GetMapping("joinattend")
+    public String joinattend(@RequestParam("U_id") int ID, Model model) {
+        List<SignUp> signUps = userImplementation.getByUserID(ID);
+        model.addAttribute("signview", signUps);
+        return "joinview";
+    }
 
     @GetMapping("Viewlist/edit/{id}")
     public String Editpage(@PathVariable("id") int id, Model model) {
@@ -163,6 +141,21 @@ public class maincontroller {
     public ModelAndView joinattend() {
         return new ModelAndView("signout", "signup", new SignUp());
     }
+
+
+    @GetMapping("signoutpage")
+    public String SignOutPage(Model model,HttpSession session) {
+        User user=(User) session.getAttribute("User_ID");
+        LocalDate localDate=LocalDate.now();
+        LocalTime localTime=LocalTime.now();
+        boolean status=userImplementation.UpdateTimeByU_ID(localTime, user.getU_id(), localDate);
+        if(status){
+            return"Success";
+        }else{
+            return"signout";
+        }
+    }
+    
 }
 
 // this is the initial commit

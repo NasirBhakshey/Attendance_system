@@ -17,8 +17,10 @@
             <td><span th:text="${view.a_id}"></span></td>
             <td><span th:text="${view.user.U_name}"></span></td>
             <td><span th:text="${view.date}"></span></td>
-            <td><span th:text="${view.time}"></span></td>
-            <td><a th:href= "@{/signview/{a_id}(a_id=${view.a_id})}">Delete</a><a th:href= "@{/signview/edit/{a_id}(id=${view.a_id})}">Edit</a></td>
+            <td><span th:text="${view.SignIn}"></span></td>
+            <td><span th:text="${view.SignOut}"></span></td>
+            <td><span th:text="${view.signOut.localTime}"></span></td>
+            <!-- <td><a th:href= "@{/signview/{a_id}(a_id=${view.a_id})}">Delete</a><a th:href= "@{/signview/edit/{a_id}(id=${view.a_id})}">Edit</a></td> -->
         </tr>
     </table>
 </body>

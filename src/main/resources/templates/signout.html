@@ -6,8 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-    <div th:if= "${Username}">
-        <h3 style="color:red;" th:text="${Username}"></h3>
+    <div th:if= "${user_ID}">
+        <h3 style="color:blueviolet;" th:text="${user_ID}"></h3>
     </div>
     <h2>Signout</h2>
 
@@ -17,5 +17,10 @@
         <h1><input type="number" th-field="*{U_id}"></h1>
         <input type="submit" name="Submit"/>
     </form>
+
+    <h1><a th:href= "@{signoutpage}">Sign-Out</a></h1>
+    <div th:if= "${date}">
+        <h3 style="color:black;" th:text="${date}"></h3>
+    </div>
 </body>
 </html>

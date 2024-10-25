@@ -1,5 +1,7 @@
 package com.attendance.application.Services;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -85,7 +87,7 @@ public class UserImplementation implements UserInterfaces{
     @Override
     public SignUp savAttend(int user_id) {
         
-        User user=userRepository.findById(user_id).orElseThrow(() -> new RuntimeException("Such is not found::"));
+        User user=userRepository.findById(user_id).orElseThrow(() -> new RuntimeException("Such User is not found::"));
         SignUp attend=new SignUp();
         attend.setUser(user);
         return attendRepository.save(attend);
@@ -150,6 +152,24 @@ public class UserImplementation implements UserInterfaces{
         return attendRepository.findByUserID(U_id);
     }
 
+    @Override
+    public boolean UpdateTimeByU_ID(LocalTime localTime, Integer ID,LocalDate localDate1) {
+        List<SignUp> signUps=getByUserID(ID);
+        int i=0;
+        if(signUps!=null){
+            for (SignUp signUp : signUps) {
+                LocalDate localDate=signUp.getDate();
+                if(localDate.equals(localDate1)){
+                    signUp.setSignOut(localTime);
+                    attendRepository.save(signUp);
+                }
+            }
+            return true;
+        }else{
+            return false;
+        }
+            
+    }
     
 
 }
