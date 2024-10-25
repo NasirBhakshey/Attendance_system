@@ -155,7 +155,6 @@ public class UserImplementation implements UserInterfaces{
     @Override
     public boolean UpdateTimeByU_ID(LocalTime localTime, Integer ID,LocalDate localDate1) {
         List<SignUp> signUps=getByUserID(ID);
-        int i=0;
         if(signUps!=null){
             for (SignUp signUp : signUps) {
                 LocalDate localDate=signUp.getDate();
