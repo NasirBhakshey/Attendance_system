@@ -8,15 +8,9 @@
 <body>
     <h1>Welcome To <span th:text="${Username}"></span> Profile...</h1>
 
+    <h1><span th:text="${date}"></span></h1>
+    <h1><span th:text="${time}"></span></h1>
     <h2><a th:href= "@{Sign-Up}">Sign-up</a></h2>
-    <h1><a th:href= "@{Viewattend}">View-attend</a></h1>
-    <!-- <h1><a th:href= "@{joinattend}">View-attend</a></h1> -->
-    <h1><a th:href= "@{Serchby}">Search-user</a></h1> 
-
-    <form action="joinattend" method="get">
-
-        Enter ID:<input type="number" name="U_id"/>
-        <input type="submit" value="Submit"/>
-    </form>
+    <h1><a th:href= "@{Viewattend1}">View-attend</a></h1>
 </body>
 </html>

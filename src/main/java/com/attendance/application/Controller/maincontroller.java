@@ -62,40 +62,53 @@ public class maincontroller {
             return "login";
         }
     }
+
     @GetMapping("Sign_up")
     public String signup(HttpSession session, Model model) {
         User user = (User) session.getAttribute("UserID");
         List<SignUp> signUp2 = userImplementation.getByUserID(user.getU_id());
-     
+        LocalTime localTime1 = LocalTime.now();
+        LocalDate localDate6 = LocalDate.now();
+
+        int j = 0;
         if (signUp2 != null) {
-            int i = 0;
-
-            for (SignUp signUp : signUp2) {
-                LocalDate localDate = signUp.getDate();
-                LocalDate localDate2 = LocalDate.now();
-                if (localDate.equals(localDate2)) {
-
-                    i++;
+            SignUp signUp3 = userImplementation.getuserByDateSignUp(user.getU_id());
+            LocalTime localTime = LocalTime.now();
+            LocalDate localDate1 = LocalDate.now();
+            LocalDate localDate3 = signUp3.getDate();
+            int date = localDate1.getDayOfMonth();
+            int date1 = localDate3.getDayOfMonth();
+            if (localDate3.equals(localDate1)) {
+                j++;
+            } else {
+                for (int i = date1; i < date; i++) {
+                    LocalDate localDate5 = localDate3.withDayOfMonth(i);
+                    if (!localDate3.equals(localDate5)) {
+                        SignUp signUp5 = userImplementation.AbsentDetails(localDate5, user.getU_id());
+                    }
                 }
             }
-            LocalDate localDate2 = LocalDate.now();
-
-
-            if (i > 0) {
+            if (j > 0) {
                 session.setAttribute("User_ID", user);
-                model.addAttribute("user_ID", user.getU_name());
-                model.addAttribute("date", localDate2);
+                model.addAttribute("Username", user.getU_name());
+                model.addAttribute("date", localDate1);
+                model.addAttribute("time", localTime);
                 return "signout";
             } else {
                 session.setAttribute("User_ID", user);
+                model.addAttribute("date", localDate1);
+                model.addAttribute("time", localTime);
                 model.addAttribute("Username", user.getU_name());
                 return "signup";
             }
         } else {
             session.setAttribute("User_ID", user);
+            model.addAttribute("date", localDate6);
+            model.addAttribute("time", localTime1);
             model.addAttribute("Username", user.getU_name());
             return "signup";
         }
+
     }
 
     @GetMapping("/Sign-Up")
@@ -103,7 +116,8 @@ public class maincontroller {
         User user = (User) session.getAttribute("User_ID");
         SignUp signUps = userImplementation.savAttend(user.getU_id());
         if (signUps != null) {
-            model.addAttribute("user_ID", user.getU_name());
+            model.addAttribute("Username", user.getU_name());
+            model.addAttribute("user_ID", user.getU_id());
             return "Success";
         } else {
             return "signup";
@@ -142,20 +156,30 @@ public class maincontroller {
         return new ModelAndView("signout", "signup", new SignUp());
     }
 
-
     @GetMapping("signoutpage")
-    public String SignOutPage(Model model,HttpSession session) {
-        User user=(User) session.getAttribute("User_ID");
-        LocalDate localDate=LocalDate.now();
-        LocalTime localTime=LocalTime.now();
-        boolean status=userImplementation.UpdateTimeByU_ID(localTime, user.getU_id(), localDate);
-        if(status){
-            return"Success";
-        }else{
-            return"signout";
+    public String SignOutPage(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("User_ID");
+        LocalDate localDate = LocalDate.now();
+        LocalTime localTime = LocalTime.now();
+        boolean status = userImplementation.UpdateTimeByU_ID(localTime, user.getU_id(), localDate);
+        if (status) {
+            model.addAttribute("Username", user.getU_name());
+            model.addAttribute("user_ID", user.getU_id());
+            return "Success";
+        } else {
+            return "signout";
         }
     }
-    
+
+    @GetMapping("/Viewattend1")
+    public String getlastattenduser(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("UserID");
+        SignUp signUp = userImplementation.getuserByDateSignUp(user.getU_id());
+        model.addAttribute("siguplist", signUp);
+        return "veiw";
+
+    }
+
 }
 
 // this is the initial commit

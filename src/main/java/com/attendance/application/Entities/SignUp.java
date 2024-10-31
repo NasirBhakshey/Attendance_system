@@ -1,7 +1,6 @@
 package com.attendance.application.Entities;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,9 +23,9 @@ public class SignUp {
     private Integer a_id;
     @Column
     private LocalDate date;
-    private LocalTime SignIn;
-    private LocalTime signOut;
-    
+    private String SignIn;
+    private String signOut;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
@@ -37,19 +36,19 @@ public class SignUp {
     public void setUser(User user) {
         this.user = user;
     }
-
-    @PrePersist
-    public void prePersist() {
-        this.date = LocalDate.now();
-        this.SignIn = LocalTime.now();
-    }
-
-    public LocalTime getSignIn() {
+    
+    
+    public String getSignIn() {
         return SignIn;
     }
-
-    public void setSignIn(LocalTime signIn) {
+    public void setSignIn(String signIn) {
         SignIn = signIn;
+    }
+    public String getSignOut() {
+        return signOut;
+    }
+    public void setSignOut(String signOut) {
+        this.signOut = signOut;
     }
 
     public Integer getA_id() {
@@ -67,14 +66,13 @@ public class SignUp {
     public void setDate(LocalDate date) {
         this.date = date;
     }
-
-    public LocalTime getSignOut() {
-        return signOut;
+    @Override
+    public String toString() {
+        return "SignUp [a_id=" + a_id + ", date=" + date + ", SignIn=" + SignIn + ", signOut=" + signOut + ", user="
+                + user + "]";
     }
 
-    public void setSignOut(LocalTime signOut) {
-        this.signOut = signOut;
-    }
+    
 
 }
 // This is attendance class

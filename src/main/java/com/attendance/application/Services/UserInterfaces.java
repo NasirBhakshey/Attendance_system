@@ -30,6 +30,14 @@ public interface UserInterfaces {
 
     public boolean UpdateTimeByU_ID(LocalTime localTime,Integer ID,LocalDate localDate1);
 
+    public boolean AutoAbsentDate();
+
+    public SignUp AbsentDetails(LocalDate localDate,int id);
+
+    public List<SignUp> getallBydate();
+
+    public SignUp getuserByDateSignUp(int id);
+
 
 
 }

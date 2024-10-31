@@ -6,7 +6,23 @@
     <title>Document</title>
 </head>
 <body>
+    <!-- <form th:action= "@{/Viewattend/Sign-Up}" method="post">
+        <table>
+            <tr>
+                <th>User-Name</th>
+                <th>Mark Present</th>
+            </tr>
+            <tr th:each= "users:${userslist}">
+                <td th:text="${users.U_name}"></td>
+                <td>
+                    <button type="submit" th:name="${U_id}" th:value="${users.U_id}">Present</button>
+                </td>
+            </tr>
+        </table>
+    </form> -->
+
     <table border="2" align="center">
+        <div th:if= "${siguplist !=null}">
         <tr>
             <th>Attend-ID</th>
             <th>User-Name</th>
@@ -15,14 +31,19 @@
             <th>Signout-Time</th>
             <th>Action</th>
         </tr>
-        <tr th:each= "veiw:${Viewlist}">
-            <td><span th:text="${veiw.a_id}"></span></td>
-            <td><span th:text="${veiw.user.U_name}"></span></td>
-            <td><span th:text="${veiw.date}"></span></td>
-            <td><span th:text="${#temporals.format(veiw.SignIn, 'hh:mm:ss a')}"></span></td>
-            <td><span th:text="${#temporals.format(veiw.signOut, 'hh:mm:ss a')}"></span></td>
-            <td><a th:href= "@{/Viewlist/{id}(id=${veiw.user.U_id})}">Delete</a><a th:href= "@{/Viewlist/edit/{id}(id=${veiw.user.U_id})}">Edit</a></td>
+        <tr>
+            <td><span th:text="${siguplist.a_id}"></span></td>
+            <td><span th:text="${siguplist.user.U_id}"></span></td>
+            <td><span th:text="${siguplist.date}"></span></td>
+            <td><span th:text="${siguplist.SignIn}"></span></td>
+            <td><span th:text="${siguplist.signOut}"></span></td>
+            <!-- <td><a th:href= "@{/Viewlist/{id}(id=${veiw.user.U_id})}">Delete</a><a th:href= "@{/Viewlist/edit/{id}(id=${veiw.user.U_id})}">Edit</a></td> -->
         </tr>
+    </div>
+    <div th:if= "${siguplist==null}">
+        <p>Such Data is not available</p>
+    </div>
+        
     </table>
 </body>
 </html>
