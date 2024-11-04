@@ -70,25 +70,22 @@ public class maincontroller {
         LocalTime localTime1 = LocalTime.now();
         LocalDate localDate6 = LocalDate.now();
 
-        int j = 0;
+        int a = 0;
         if (signUp2 != null) {
             SignUp signUp3 = userImplementation.getuserByDateSignUp(user.getU_id());
             LocalTime localTime = LocalTime.now();
             LocalDate localDate1 = LocalDate.now();
             LocalDate localDate3 = signUp3.getDate();
-            int date = localDate1.getDayOfMonth();
-            int date1 = localDate3.getDayOfMonth();
+            LocalDate date=localDate1;
             if (localDate3.equals(localDate1)) {
-                j++;
+                a++;
             } else {
-                for (int i = date1; i < date; i++) {
-                    LocalDate localDate5 = localDate3.withDayOfMonth(i);
-                    if (!localDate3.equals(localDate5)) {
-                        SignUp signUp5 = userImplementation.AbsentDetails(localDate5, user.getU_id());
-                    }
+                while(date.minusDays(1).isAfter(localDate3)){
+                    date=date.minusDays(1);
+                    userImplementation.AbsentDetails(date, user.getU_id());
                 }
             }
-            if (j > 0) {
+            if (a > 0) {
                 session.setAttribute("User_ID", user);
                 model.addAttribute("Username", user.getU_name());
                 model.addAttribute("date", localDate1);
@@ -125,8 +122,9 @@ public class maincontroller {
     }
 
     @GetMapping("Viewattend")
-    public String listAttendent(Model model) {
-        List<SignUp> attends = userImplementation.getallAttend();
+    public String listAttendent(Model model,HttpSession session) {
+        User user = (User) session.getAttribute("User_ID");
+        List<SignUp> attends = userImplementation.getByUserID(user.getU_id());
         model.addAttribute("Viewlist", attends);
         return "veiw";
     }
