@@ -58,7 +58,7 @@ public class maincontroller {
             model.addAttribute("Username", user2.getU_name());
             return "redirect:/Sign_up";
         } else {
-            model.addAttribute("errormsg", "Such User is not Found");
+            model.addAttribute("errors", "Such User is not Found");
             return "login";
         }
     }
@@ -69,19 +69,19 @@ public class maincontroller {
         List<SignUp> signUp2 = userImplementation.getByUserID(user.getU_id());
         LocalTime localTime1 = LocalTime.now();
         LocalDate localDate6 = LocalDate.now();
+        SignUp signUp3 = userImplementation.getuserByDateSignUp(user.getU_id());
 
         int a = 0;
-        if (signUp2 != null) {
-            SignUp signUp3 = userImplementation.getuserByDateSignUp(user.getU_id());
+        if (signUp2 != null && signUp3 != null) {
             LocalTime localTime = LocalTime.now();
             LocalDate localDate1 = LocalDate.now();
             LocalDate localDate3 = signUp3.getDate();
-            LocalDate date=localDate1;
+            LocalDate date = localDate1;
             if (localDate3.equals(localDate1)) {
                 a++;
             } else {
-                while(date.minusDays(1).isAfter(localDate3)){
-                    date=date.minusDays(1);
+                while (date.minusDays(1).isAfter(localDate3)) {
+                    date = date.minusDays(1);
                     userImplementation.AbsentDetails(date, user.getU_id());
                 }
             }
@@ -122,7 +122,7 @@ public class maincontroller {
     }
 
     @GetMapping("Viewattend")
-    public String listAttendent(Model model,HttpSession session) {
+    public String listAttendent(Model model, HttpSession session) {
         User user = (User) session.getAttribute("User_ID");
         List<SignUp> attends = userImplementation.getByUserID(user.getU_id());
         model.addAttribute("Viewlist", attends);

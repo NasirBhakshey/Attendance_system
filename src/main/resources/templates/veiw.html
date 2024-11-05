@@ -6,23 +6,146 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
 
+.attendance-container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    width: 100%;
+    max-width: 900px;
+    overflow-x: auto;
+}
+
+.attendance-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.attendance-table th,
+.attendance-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.attendance-table th {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.attendance-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.attendance-table tr:hover {
+    background-color: #e6e6e6;
+}
+
+.action-cell {
+    white-space: nowrap;
+}
+
+.action-link {
+    display: inline-block;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    color: white;
+    font-size: 0.9em;
+    margin-right: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.delete {
+    background-color: #f44336;
+}
+
+.delete:hover {
+    background-color: #d32f2f;
+}
+
+.edit {
+    background-color: #2196F3;
+}
+
+.edit:hover {
+    background-color: #1976D2;
+}
+
+@media screen and (max-width: 600px) {
+    .attendance-table {
+        font-size: 14px;
+    }
+
+    .attendance-table th,
+    .attendance-table td {
+        padding: 8px;
+    }
+
+    .action-link {
+        padding: 4px 8px;
+        font-size: 0.8em;
+    }
+}
+
+</style>
 <body>
 
-    <table border="2" align="center">
+    <!-- <table border="2" align="center">
         <tr>
             <th>Attend-Date</th>
             <th>SignIn-Time</th>
             <th>Signout-Time</th>
         </tr>
         <tr th:each= "view:${Viewlist}">
-            <!-- <td><span th:text="${view.a_id}"></span></td> -->
-            <td><span th:text="${view.date}"></span></td>
+            <td><span th:text="${view.a_id}"></span></td> -->
+            <!-- <td><span th:text="${view.date}"></span></td>
             <td><span th:text="${view.SignIn}"></span></td>
-            <td><span th:text="${view.signOut}"></span></td>
+            <td><span th:text="${view.signOut}"></span></td> -->
             <!-- <td><a th:href= "@{/Viewlist/{id}(id=${view.user.U_id})}">Delete</a><a th:href= "@{/Viewlist/edit/{id}(id=${view.user.U_id})}">Edit</a></td> -->
-        </tr>
-    </table>
+        <!-- </tr>
+    </table> -->
+
+   <div class="attendance-container">
+       <table class="attendance-table">
+           <thead>
+               <tr>
+                   <th>Attend Date</th>
+                   <th>Sign In Time</th>
+                   <th>Sign Out Time</th>
+                   <!-- <th>Actions</th> -->
+               </tr>
+           </thead>
+           <tbody>
+               <tr th:each="view : ${Viewlist}">
+                   <td th:text="${view.date}"></td>
+                   <td th:text="${view.SignIn}"></td>
+                   <td th:text="${view.signOut}"></td>
+                   <!-- <td class="action-cell">
+                       <a th:href="@{/Viewlist/{id}(id=${view.user.U_id})}" class="action-link delete">Delete</a>
+                       <a th:href="@{/Viewlist/edit/{id}(id=${view.user.U_id})}" class="action-link edit">Edit</a>
+                   </td> -->
+               </tr>
+           </tbody>
+       </table>
+   </div>
+   
+    
 </body>
 
 </html>

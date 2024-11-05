@@ -1,29 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .login-container {
+        background-color: #ffffff;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .message-container {
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    .success-message {
+        color: #4CAF50;
+    }
+
+    .error-message {
+        color: #f44336;
+    }
+
+    .login-form h2 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        color: #333;
+    }
+
+    .input-group {
+        margin-bottom: 1rem;
+    }
+
+    .input-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #555;
+    }
+
+    .input-group input {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+    }
+
+    .login-button {
+        width: 100%;
+        padding: 0.75rem;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .login-button:hover {
+        background-color: #45a049;
+    }
+
+    .register-link,
+    .home-link {
+        text-align: center;
+        margin-top: 1rem;
+    }
+
+    .register-link a,
+    .home-link a {
+        color: #4CAF50;
+        text-decoration: none;
+    }
+
+    .register-link a:hover,
+    .home-link a:hover {
+        text-decoration: underline;
+    }
+</style>
+
 <body>
-    <div th:if= "${Successmsg}">
-        <h3 style="color: aqua;" th:text="${Successmsg}"></h3>
-    </div>
-    <div th:if= "${errormsg}">
-        <h3 style="color:red;" th:text="${errormsg}"></h3>
-    </div>
-        <form th:action="@{loginform}" th:object="${user}" method="post">
-            <table border="2" align="center">
-           <tr><caption><h3>Login Here...</h3></caption></tr>
-            <tr><td>Enter Email-ID :</td><td><input type="email" th:field="*{email}"/></td></tr>
-            <tr><td>Enter Password :</td><td>
-            <input type="password" th:field="*{U_pass}"/></td></tr>
-            <tr><td><input type="submit" name="Login"/></td></tr>
-        </table>
-    <br>
-    <br>
-    <p align="center">If Your Not <a href="regpage"><b>Register</b></a></p><br>
-    <p align="center">Home Page...<a href="index.html"><b>Home</b></a></p>
+    <div class="login-container">
+        <div class="message-container">
+            <h3 class="success-message" th:if="${Successmsg}" th:text="${Successmsg}"></h3>
+            <h3 class="error-message" th:if="${errors}" th:text="${errors}"></h3>
+        </div>
+
+        <form class="login-form" th:action="@{loginform}" th:object="${user}" method="post">
+            <h2>Login</h2>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" th:field="*{email}" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" th:field="*{U_pass}" required>
+            </div>
+            <button type="submit" class="login-button">Login</button>
+            <p class="register-link">Not registered? <a href="regpage">Sign up</a></p>
+            <p class="home-link"><a href="index.html">Back to Home</a></p>
         </form>
+    </div>
 </body>
+
 </html>

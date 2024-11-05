@@ -5,8 +5,113 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.success-container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.success-message h1 {
+    color: #4CAF50;
+    margin-bottom: 1rem;
+}
+
+.username {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.user-id {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.login-button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.login-button:hover {
+    background-color: #45a049;
+}
+
+.home-button {
+    background-color: #2196F3;
+    color: white;
+}
+
+.home-button:hover {
+    background-color: #1976D2;
+}
+
+@media (max-width: 480px) {
+    .success-container {
+        padding: 1.5rem;
+    }
+
+    .success-message h1 {
+        font-size: 1.5rem;
+    }
+
+    .username, .user-id {
+        font-size: 1rem;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .button {
+        width: 100%;
+    }
+}
+
+</style>
 <body>
-    <h1>Sign-Up <span th:text="${Username}"></span> SuccessFully</h1>
-    <h1>Sign-Up <span th:text="${user_ID}"></span> ID</h1>
+    <div class="success-container">
+        <div class="success-message">
+            <h1>Sign-Up Successful!</h1>
+            <p class="username"><span th:text="${Username}">!</p>
+            <p class="user-id">Your User ID: <span th:text="${user_ID}"></p>
+        </div>
+        <div class="action-buttons">
+            <a href="/loginpage" class="button login-button">Login</a>
+            <a href="/" class="button home-button">Home</a>
+        </div>
+    </div>
+    
 </body>
 </html>

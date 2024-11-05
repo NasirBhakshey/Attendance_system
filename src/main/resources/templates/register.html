@@ -5,29 +5,124 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.register-container {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.message-container {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.success-message {
+    color: #4CAF50;
+}
+
+.error-message {
+    color: #f44336;
+}
+
+.register-form h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.input-group {
+    margin-bottom: 1rem;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.register-button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.register-button:hover {
+    background-color: #45a049;
+}
+
+.login-link, .home-link {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.login-link a, .home-link a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+.login-link a:hover, .home-link a:hover {
+    text-decoration: underline;
+}
+
+</style>
 <body>
-    <div th:if= "${Successmsg}">
-        <h3 style="color: aqua;" th:text="${Successmsg}"></h3>
+    <div class="register-container">
+        <div class="message-container">
+            <h3 class="success-message" th:if="${Successmsg}" th:text="${Successmsg}"></h3>
+            <h3 class="error-message" th:if="${errormsg}" th:text="${errormsg}"></h3>
+        </div>
+        
+        <form class="register-form" th:action="@{regform}" th:object="${user}" method="post">
+            <h2>Register Here</h2>
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" th:field="*{U_name}" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" th:field="*{U_pass}" required>
+            </div>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" th:field="*{email}" required>
+            </div>
+            <div class="input-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" th:field="*{U_phoneNo}" required>
+            </div>
+            <button type="submit" class="register-button">Register</button>
+            <p class="login-link">Already registered? <a href="loginpage">Login</a></p>
+            <p class="home-link"><a href="index.html">Back to Home</a></p>
+        </form>
     </div>
     
-    <div th:if= "${errormsg}">
-        <h3 style="color:red;" th:text="${errormsg}"></h3>
-    </div>
-        <form th:action="@{regform}" th:object="${user}" method="post">
-            <table border="2" align="center">
-            <caption><h3>Register Here...</h3></caption>
-            <tr><td>Enter UserName :</td><td>
-            <input type="text" th:field="*{U_name}"/></td></tr>
-            <tr><td>Enter Password :</td><td>
-            <input type="password" th:field="*{U_pass}"/></td></tr>
-            <tr><td>Enter Email-ID :</td><td><input type="email" th:field="*{email}"/></td></tr>
-            <tr><td>Enter Phone-No :</td><td><input type="text" th:field="*{U_phoneNo}"/></td></tr>
-            <tr><td><input type="submit" name="Register"/></td></tr>
-        </table>
-    <br>
-    <br>
-    <p align="center">If Already Registered...<a href="loginpage"><b>Login</b></a></p><br>
-    <p align="center">Home Page...<a href="index.html"><b>Home</b></a></p>
-        </form>
 </body>
 </html>
