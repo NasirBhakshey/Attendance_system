@@ -22,7 +22,7 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class maincontroller {
-
+    
     @Autowired
     private UserImplementation userImplementation;
 
@@ -59,8 +59,15 @@ public class maincontroller {
             return "redirect:/Sign_up";
         } else {
             model.addAttribute("errors", "Such User is not Found");
-            return "login";
+            return "redirect:/admin";
         }
+    }
+
+    @GetMapping("admin")
+    public String admin_user(Model model){
+        List<User> users = userImplementation.getlldetails();
+        model.addAttribute("users_list", users);
+        return "Admin";
     }
 
     @GetMapping("Sign_up")
