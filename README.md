@@ -1,12 +1,12 @@
 # Attendance_System
 
-Technologies used:- Core-Java, HTML5, CSS3, Thymeleaf.Spring Boot and MySQL
+Technologies used:- Java Servlet, JSp, Java Persistence API, JDBC API.
 
 ## Requirements
 
 - Java.
 - MySQL 8.0 or higher for spatial features in MySQL.
-- Spring Boot, Servlet, JSP, Expression Language, Spring Data JPA.
+- Spring Boot, Servlet, JSP, Expression Language, Spring Data JPA,Thymeleaf.
 - Tomcat Server for localhost.
 
 ## Features
