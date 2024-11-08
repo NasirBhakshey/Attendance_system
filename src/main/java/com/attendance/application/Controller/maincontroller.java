@@ -22,7 +22,7 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class maincontroller {
-    
+
     @Autowired
     private UserImplementation userImplementation;
 
