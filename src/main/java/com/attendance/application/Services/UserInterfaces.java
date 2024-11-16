@@ -9,7 +9,7 @@ import com.attendance.application.Entities.User;
 
 public interface UserInterfaces {
 
-    public boolean InsertUser(User user);
+    public User InsertUser(User user);
     public boolean updateUser(User user, int id);
     public User Loginuser(String email,String pass);
     public List<User> getlldetails();

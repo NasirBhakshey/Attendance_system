@@ -4,7 +4,6 @@ import java.time.*;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.attendance.application.Entities.SignUp;
 import com.attendance.application.Entities.User;
+import com.attendance.application.Services.EmailServices;
 import com.attendance.application.Services.UserImplementation;
 
 import jakarta.servlet.http.HttpSession;
@@ -26,6 +26,9 @@ public class maincontroller {
     @Autowired
     private UserImplementation userImplementation;
 
+    @Autowired
+    private EmailServices emailServices;
+
     @GetMapping("regpage")
     public ModelAndView Registerpage() {
         return new ModelAndView("register", "user", new User());
@@ -33,8 +36,12 @@ public class maincontroller {
 
     @PostMapping("regform")
     public String registerd(@ModelAttribute("user") User user, Model model) {
-        boolean status = userImplementation.InsertUser(user);
-        if (status) {
+        User status = userImplementation.InsertUser(user);
+        String emailBody = String.format(
+                "New Register Form Submission:\n\nU_ID: %s\nName: %s\nEmail: %s\nU_phoneNo: %s",
+                status.getU_id(), status.getU_name(), status.getEmail(), status.getU_phoneNo());
+        emailServices.sendEmail(status.getEmail(), "New Register Form Submission Successfully", emailBody);
+        if (status != null && emailBody != null) {
             model.addAttribute("Successmsg", "User Register Successfully...");
             return "login";
         } else {
@@ -64,7 +71,7 @@ public class maincontroller {
     }
 
     @GetMapping("admin")
-    public String admin_user(Model model){
+    public String admin_user(Model model) {
         List<User> users = userImplementation.getlldetails();
         model.addAttribute("users_list", users);
         return "Admin";

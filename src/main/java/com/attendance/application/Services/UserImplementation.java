@@ -1,5 +1,6 @@
 package com.attendance.application.Services;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -7,6 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +17,8 @@ import com.attendance.application.Entities.SignUp;
 import com.attendance.application.Entities.User;
 import com.attendance.application.Repository.AttendRepository;
 import com.attendance.application.Repository.UserRepository;
+
+import jakarta.mail.internet.MimeMessage;
 
 @Service
 public class UserImplementation implements UserInterfaces {
@@ -24,16 +29,13 @@ public class UserImplementation implements UserInterfaces {
     @Autowired
     private AttendRepository attendRepository;
 
-    // private final LocalTime localTime= LocalTime.of(12, 57);
-
     @Override
-    public boolean InsertUser(User user) {
+    public User InsertUser(User user) {
         try {
-            userRepository.save(user);
-            return true;
+           return userRepository.save(user);
         } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+           e.printStackTrace();
+           return null;
         }
     }
 
