@@ -1,6 +1,5 @@
 package com.attendance.application.Services;
 
-import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -8,8 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +14,6 @@ import com.attendance.application.Entities.SignUp;
 import com.attendance.application.Entities.User;
 import com.attendance.application.Repository.AttendRepository;
 import com.attendance.application.Repository.UserRepository;
-
-import jakarta.mail.internet.MimeMessage;
 
 @Service
 public class UserImplementation implements UserInterfaces {
@@ -32,10 +27,10 @@ public class UserImplementation implements UserInterfaces {
     @Override
     public User InsertUser(User user) {
         try {
-           return userRepository.save(user);
+            return userRepository.save(user);
         } catch (Exception e) {
-           e.printStackTrace();
-           return null;
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -214,7 +209,7 @@ public class UserImplementation implements UserInterfaces {
     public SignUp AbsentDetails(LocalDate localDate, int id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Such User is not found::"));
-                String str="ABSENT";
+        String str = "ABSENT";
         if (user != null) {
             SignUp attend = new SignUp();
             attend.setSignIn(str);
@@ -222,7 +217,7 @@ public class UserImplementation implements UserInterfaces {
             attend.setSignOut(str);
             attend.setUser(user);
             return attendRepository.save(attend);
-        }else{
+        } else {
             throw new RuntimeException("");
         }
 
