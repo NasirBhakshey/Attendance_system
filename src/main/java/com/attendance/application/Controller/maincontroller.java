@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import com.attendance.application.Services.EmailServices;
 import com.attendance.application.Services.UserImplementation;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
 public class maincontroller {
@@ -35,7 +37,12 @@ public class maincontroller {
     }
 
     @PostMapping("regform")
-    public String registerd(@ModelAttribute("user") User user, Model model) {
+    public String registerd(@ModelAttribute("user") User user, Model model, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            System.out.println("Error...");
+            model.addAttribute("errors", bindingResult.getAllErrors());
+            return "register";
+        }
         User status = userImplementation.InsertUser(user);
         String emailBody = String.format(
                 "New Register Form Submission:\n\nU_ID: %s\nName: %s\nEmail: %s\nU_phoneNo: %s",
