@@ -29,7 +29,7 @@ Technologies used:- Java Servlet, JSp, Java Persistence API, JDBC API.
 
 ## Database
 
-MySQL is used as database. Database design is made easy to understand.
+MySQL is used for a database. Database design is made easy to understand.
 
 ## Importing Database
 
